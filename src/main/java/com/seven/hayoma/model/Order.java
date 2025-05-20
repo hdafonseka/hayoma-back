@@ -1,9 +1,7 @@
 package com.seven.hayoma.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -11,20 +9,24 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "orders")
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String orderId;
+
     private LocalDate date;
+
     private Double total;
+
     private String status;
+
     private String payment;
 
-    @ManyToOne
-    @JoinColumn(name = "shop_id")
-    private Shop shop;
+    private Long shopId; // Just store shopId as Long for simplicity
 
-    // Getters and setters
 }
